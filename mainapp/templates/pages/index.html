@@ -91,13 +91,9 @@
             <!-- /.card-header -->
             <!-- form start -->
             <form method="POST" enctype="multipart/form-data"  > 
+              {% csrf_token %}
               <div class="card-body"> 
-                <input type="text" class="form-control">
-                <input type="text" class="form-control">
-                <input type="text" class="form-control">
-                <input type="text" class="form-control">
-                <input type="text" class="form-control">
-                <small id='totalrente' class="form-text text-muted"></small>
+                {{form}}
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
@@ -116,19 +112,12 @@
           <div class="row justify-content-center mb-3">
             <div class="col-4 ">
               <ul class="nav">
-            
+              
+              {% for cate in catego|slice:'4' %}
                 <li class="nav-item ">
-                  <a id="" class="nav-link bg-primary" href="#">تاريخ</a>
-                </li>
-                <li class="nav-item ">
-                  <a id="" class="nav-link bg-primary" href="#">فن</a>
-                </li>
-                <li class="nav-item ">
-                  <a id="" class="nav-link bg-primary" href="#">ثقافة</a>
-                </li>
-                <li class="nav-item ">
-                  <a id="" class="nav-link bg-primary" href="#">رومانسية</a>
-                </li>
+                  <a id="" class="nav-link bg-primary" href="#">{{cate.name}}</a>
+                </li>             
+                {% endfor %}
               </ul>
             </div>
           </div>
@@ -149,13 +138,17 @@
                     <span class="sr-only">Toggle Dropdown</span>
                   </button>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">تعديل</a>
+                    <a class="dropdown-item" href="{% url 'update' book.id %}">تعديل</a>
                     <a class="dropdown-item" href="#">حذف</a>
                 <!-- Button trigger modal -->
                   </div>
                 </div>
-
+                
+                {% if book.img_book %}
                 <div style="background: url({{book.img_book.url}});background-size:cover;" class="widget-user-header bg-info">
+                  {% else %}
+                  <div class="widget-user-header bg-info"> 
+                    {% endif %}
                   <h3 class="widget-user-username">{{book.title}}</h3>
                   <h5 class="widget-user-desc">{{book.author}}</h5>
                 </div>
@@ -177,15 +170,22 @@
                         <!-- /.col -->
                     <div class="col-sm-4 border-right">
                       <div class="description-block">
+                        {% if book.price %}
                         <h5 class="description-header">${{book.price}}</h5>
                         <span class="description-text">السعر</span>
+                        {% elif book.retal_day %} 
+                        <h5 class="description-header">${{book.retal_day}}</h5>
+                        <span class="description-text">retal day</span>          
+                        {% elif book.retal_period %} 
+                        <h5 class="description-header">${{book.retal_period}}</h5>
+                        <span class="description-text">retal period </span>            
+                        {% endif %}
                       </div>
                       <!-- /.description-block -->
                     </div>
                         <!-- /.col -->
                     <div class="col-sm-4">
                       <div class="description-block">
-                        
                         {% if book.staus == 'available' %}
                         <h5 class="description-header text-success">{{book.staus}}</h5>
                         {% elif book.staus == 'rental' %}  

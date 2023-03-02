@@ -47,56 +47,23 @@
                     </a>
                   </li> 
               <form id="cat" method="POST">
-             
-                  <input type="text" class="form-control">
+                  {% csrf_token %}
+                <div id="catinput">
+                  {{formcat}}
 
                   <button type="submit" class="btn btn-success">save</button>
                   <button id="backcat" class="btn btn-primary ">back</button>
+                </div>
               </form>  
-             
+                
+                {% for cat in catego %}
                   <li style="cursor: pointer;" class="nav-item">
                     <a id="" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>test 1</p>
+                      <p>{{cat}}</p>
                     </a>
-                  </li>
- 
-                  <li style="cursor: pointer;" class="nav-item">
-                    <a id="" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>test 2</p>
-                    </a>
-                  </li>
-
-                  <li style="cursor: pointer;" class="nav-item">
-                    <a id="" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>test 3</p>
-                    </a>
-                  </li>
-
-                  <li style="cursor: pointer;" class="nav-item">
-                    <a id="" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>test 4</p>
-                    </a>
-                  </li>
-
-                  <li style="cursor: pointer;" class="nav-item">
-                    <a id="" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>test 5</p>
-                    </a>
-                  </li>
-
-                  <li style="cursor: pointer;" class="nav-item">
-                    <a id="" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>test 6</p>
-                    </a>
-                  </li>
-        
-
+                  </li>              
+                  {% endfor %}                 
             </ul>
           </li>
 
