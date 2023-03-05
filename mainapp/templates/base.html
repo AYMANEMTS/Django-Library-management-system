@@ -38,6 +38,11 @@
 
 
 
+
+
+
+  
+
 <!-- REQUIRED SCRIPTS -->
 <script src="{% static 'plugins/jquery_datepacker/jquery_ui.js' %}"></script>
 
@@ -65,7 +70,15 @@
 </script>
 <script>
  
-  
+$(document).ready(function(){
+  var total = 0;
+  $(".totalprice").each(function(){
+    $(this).hide()
+    var salary = $(this).text()
+    total += parseInt(salary) 
+  });
+  $("#totalsalarys").text()
+});
 
 
 $(function () {
@@ -167,7 +180,7 @@ $(function () {
     type: 'pie',
     data: {
       datasets: [{
-        data: ['35','25','40'],
+        data: ['{{availble}}','{{sold}}','{{rental}}'],
         backgroundColor :["#27c100","#f3545d","#fdaf4b"],
         borderWidth: 10,
         
@@ -198,9 +211,35 @@ $(function () {
 
 })
 
-
- 
 </script>
+
+
+<script>
+$("#catinput").hide()
+$("#addcat").click(function(){
+  $("#catinput").show()
+});
+$("#backcat").click(function(){
+  $("#catinput").hide()
+});
+</script>
+<script>
+
+{% for book in Book %}
+
+$(".cate{{book.category.id}}").click(function(){
+  $(".bookhide").hide()
+  $(".book{{book.category.id}}").show()
+});
+$(".status{{book.staus}}").click(function(){
+  $(".bookhide").hide()
+  $(".book{{book.staus}}").show()
+});
+
+{% endfor %}
+
+</script>
+
 
 </body>
 </html>

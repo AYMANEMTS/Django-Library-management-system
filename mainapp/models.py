@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.utils.text import slugify
 # Create your models here.
 
 
@@ -27,7 +27,12 @@ class Book(models.Model):
     active = models.BooleanField(default=True)
     staus = models.CharField(choices=status_book,null=True,blank=True, max_length=50)
     category = models.ForeignKey(Catego,on_delete=models.PROTECT,null=True,blank=True)
+    total_rental = models.DecimalField(max_digits=5, decimal_places=2,null=True,blank=True)
+    slug = models.SlugField(null=True,blank=True)
 
+    def save(self,*args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Book,self).save(*args, **kwargs)
     def __str__(self):
         return self.title
     

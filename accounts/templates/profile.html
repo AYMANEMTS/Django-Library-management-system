@@ -1,0 +1,13 @@
+{% extends 'baseauth.html' %}
+{% block body %}
+<div class="container-fuild">
+   <div class="row d-flex justify-content-center align-items-center h-100">
+      <h1>Profile</h1>
+       <form method="POST" enctype="multipart/form-data">
+       {% csrf_token %}
+       {{ form.as_p }}
+       <button type="submit">Save Changes</button>
+      </form>
+    </div>
+</div>
+{% endblock %}

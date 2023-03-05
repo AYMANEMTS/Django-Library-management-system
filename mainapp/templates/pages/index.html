@@ -10,7 +10,7 @@
 
 
     <!-- Content Wrapper. Contains page content -->
-    <div   class="content-wrapper">
+    <div   class="content-wrapper" style="padding-top:20px;">
       <!-- Content Header (Page header) -->
   
   
@@ -28,7 +28,7 @@
                 <div class="card-body">
                   <div class="d-flex">
                     <p class="d-flex flex-column">
-                      <span class="text-bold text-lg">500</span>
+                      <span class="text-bold text-lg">{{lenghtbook}}</span>
                       <span>اجمالي عدد الكتب</span>
                     </p>  
                   </div>
@@ -43,6 +43,23 @@
             </div>
             <!-- /.col-md-6 -->
             
+            {% comment %}
+              
+                                                                          this for statistics 
+              
+            {% for book in Book %}
+  
+            {% if book.price != None or book.staus == 'sold' %}
+                <p class="totalprice">{{book.price}}</p>
+            {% endif %}
+            
+            {% if book.total_rental != None or book.staus == 'rental' %}
+            <p class="totalprice">{{book.total_rental}}</p>
+            {% endif %}
+
+            {% endfor %}
+
+            {% endcomment %}
             <div class="col-lg-6">
               <div class="card">
                 <div class="card-header border-0">
@@ -53,7 +70,7 @@
                 <div class="card-body">
                   <div class="d-flex">
                     <p class="d-flex flex-column">
-                      <span id="totalsalarys" class="text-bold text-lg">$250</span><br></p>
+                      <span id="totalsalarys" class="text-bold text-lg">$</span><br></p>
                   </div>
                   <!-- /.d-flex -->
   
@@ -114,7 +131,7 @@
               <ul class="nav">
               
               {% for cate in catego|slice:'4' %}
-                <li class="nav-item ">
+                <li class="nav-item cate{{cate.id}} ">
                   <a id="" class="nav-link bg-primary" href="#">{{cate.name}}</a>
                 </li>             
                 {% endfor %}
@@ -128,7 +145,7 @@
         {% for book in Book %}
 
           <!-- الكتب -->
-              <div id="" class="col-md-4">
+              <div id="" class="col-md-4 bookhide book{{book.category.id}} book{{book.staus}}">
                   <!-- Widget: user widget style 1 -->
                 <div id="" class="card card-widget widget-user ">
                   <!-- Add the bg color to the header using any of the bg-* classes -->
@@ -138,8 +155,8 @@
                     <span class="sr-only">Toggle Dropdown</span>
                   </button>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'update' book.id %}">تعديل</a>
-                    <a class="dropdown-item" href="#">حذف</a>
+                    <a class="dropdown-item" href="{% url 'update' book.slug %}">تعديل</a>
+                    <a class="dropdown-item" href="{% url 'delet' book.slug %}">حذف</a>
                 <!-- Button trigger modal -->
                   </div>
                 </div>
@@ -222,6 +239,10 @@
       <!-- /.content -->
 </div>
     <!-- /.content-wrapper -->
+
+
+
+
   
 
 {% endblock body %}

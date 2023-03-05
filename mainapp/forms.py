@@ -24,6 +24,7 @@ class AddBookForm(forms.ModelForm):
             'retal_period',
             'staus',
             'category',
+            'total_rental',
         ]
         widgets = {
             'title':forms.TextInput(attrs={'class':' form-control'}),
@@ -34,6 +35,7 @@ class AddBookForm(forms.ModelForm):
             'price':forms.NumberInput(attrs={'class':'form-control'}),
             'retal_day':forms.NumberInput(attrs={'class':'form-control'}),
             'retal_period':forms.NumberInput(attrs={'class':'form-control'}),
+            'total_rental':forms.NumberInput(attrs={'class':'form-control'}),
             'staus':forms.Select(attrs={'class':'form-control'}),
             'category':forms.Select(attrs={'class':'form-control'}),
 

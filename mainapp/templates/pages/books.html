@@ -25,31 +25,31 @@
                 <div class="row d-flex align-items-stretch">
                   <!-- بداية الكتاب -->
                   
-                  {% for bok in Book %}
-                  <div   class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch ">
+                  {% for book in Book %}
+                  <div class="col-12 col-sm-6 col-md-4 bookhide book{{book.category.id}} book{{book.staus}}">
                     <div  id="" class="card bg-light">
                       <div  class="card-header text-muted border-bottom-0">
-                         {{bok.category}}
+                         {{book.category}}
                       </div>
                       <div class="card-body pt-0">
                         <div class="row">
                           <div class="col-7">
-                            <h2 class="lead"><b>{{bok}}</b></h2>
+                            <h2 class="lead"><b>{{book}}</b></h2>
                             <ul class="  fa-ul text-muted">
-                              <li class="small"><span class="fa-li"></span>{{bok.staus}}: الحالة</li>
-                              {% if bok.price %}
-                              <li class="small"><span class="fa-li"></span>السعر: {{bok.price}}</li>
-                              {% elif bok.retal_day %} 
-                              <li class="small"><span class="fa-li"></span>retal day: {{bok.retal_day}}</li>
-                              {% elif bok.retal_period %} 
-                              <li class="small"><span class="fa-li"></span>retal period: {{bok.retal_period}}</li>
+                              <li class="small"><span class="fa-li"></span>{{book.staus}}: الحالة</li>
+                              {% if book.price %}
+                              <li class="small"><span class="fa-li"></span>السعر: {{book.price}}</li>
+                              {% elif book.retal_day %} 
+                              <li class="small"><span class="fa-li"></span>retal day: {{book.retal_day}}</li>
+                              {% elif book.retal_period %} 
+                              <li class="small"><span class="fa-li"></span>retal period: {{book.retal_period}}</li>
                             </ul>
                             {% endif %}
                           </div>
                           <div class="col-5 text-center">
                             
-                            {% if bok.img_book %}
-                              <img style="height: 120px; width: 120px;"  src="{{bok.img_book.url}}" alt="" class="img-circle img-fluid">
+                            {% if book.img_book %}
+                              <img style="height: 120px; width: 120px;"  src="{{book.img_book.url}}" alt="" class="img-circle img-fluid">
                               {% else %}
                               <img style="height: 120px; width: 120px;"  src="{% static 'dist/img/photo1.png' %}" alt="" class="img-circle img-fluid">
                               {% endif %}
@@ -58,10 +58,10 @@
                       </div>
                       <div class="card-footer">
                         <div class="text-right">
-                          <a href="#" class="btn btn-sm bg-danger">
+                          <a href="{% url 'delet' book.slug %}" class="btn btn-sm bg-danger">
                             <i class="fas fa-trash"></i>
                           </a>
-                          <a href="#" class="btn btn-sm btn-primary">
+                          <a href="{% url 'update' book.slug %}" class="btn btn-sm btn-primary">
                             <i class="fas fa-book"></i> تعديل
                           </a>
                         </div>
